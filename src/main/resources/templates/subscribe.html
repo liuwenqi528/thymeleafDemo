@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/gtvg.css" th:href="@{/css/gtvg.css}" />
+    <title>Title</title>
+</head>
+<body>
+<form action="subscribe.html" th:attr="action=@{/subscribe}">
+    <fieldset>
+        <input type="text" name="email" />
+        <input type="submit" value="Subscribe!" th:value="#{subscribe.submit}"/>
+    </fieldset>
+</form>
+</body>
+</html>

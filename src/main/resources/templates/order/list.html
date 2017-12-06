@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../static/css/gtvg.css" th:href="@{/css/gtvg.css}" />
+    <script type="text/javascript" src="code.jquery.com/jquery-2.0.3.min.js" th:src="@{//code.jquery.com/jquery-2.0.3.min.js}" ></script>
+    <title>订单列表</title>
+</head>
+<body>
+<h1>Order list</h1>
+<table>
+    <tr>
+        <th>DATE</th>
+        <th>CUSTOMER</th>
+        <th>TOTAL</th>
+        <th></th>
+    </tr>
+    <tr th:each="o : ${orderList}" th:class="${oStat.odd}?'odd'">
+        <td th:text="${#calendars.format(o.date,'yyyy/MM/dd')}">2017/11/11</td>
+        <td th:text="${o.customer.name}">Frederic Tomato</td>
+        <!--<td th:text="${#aggregates.sum(o.orderLines.{purchasePrice * amount})}">23.32</td>-->
+        <td th:id="|${o.id}_allPrice|" th:remove="none">
+            <input  type="hidden" th:each="ol:${o.orderLines}" th:class="|${o.id}_op|" th:value="${ol.purchasePrice * ol.amount}"/>
+
+            <script type="text/javascript" th:inline="javascript">
+                var allPrice =0;
+                var oid = [[${o.id}]];
+                $("."+oid+"_op").each(function(){
+                    allPrice+=Number($(this).val());
+                })
+                $("#"+oid+"_allPrice").text(allPrice);
+            </script>
+        </td>
+        <td>
+            <a href="details.html" th:href="@{/order/detail(orderId=${o.id})}">view</a>
+        </td>
+    </tr>
+</table>
+<p>
+    <a href="../home.html" th:href="@{/home/toHome}">Return to home
+    </a>
+</p>
+</body>
+</html>

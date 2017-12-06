@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../../static/css/gtvg.css" th:href="@{/css/gtvg.css}"/>
+    <title>Title</title>
+
+</head>
+<body>
+<h1>Comments for product: <span th:text="${product.name}">Hot Garlic</span></h1>
+
+<table>
+    <tr th:each="c : ${product.comments}" th:class="${cStat.odd}? 'odd'">
+        <td th:text="${c.text}">Garlic is just fantastic!</td>
+    </tr>
+</table>
+
+<p>
+    <a href="list.html" th:href="@{/product/list}">Return to product list</a>
+</p>
+
+</body>
+</html>
